@@ -9,7 +9,7 @@
 (async()=>{
   const status=document.getElementById('status');
   try{
-    const targetPath='/Abyss.3/';
+    const targetPath='/Abyss.2/';
     const registrations=await navigator.serviceWorker.getRegistrations();
     await Promise.all(registrations.filter(registration=>new URL(registration.scope).pathname===targetPath).map(registration=>registration.unregister()));
     const cacheNames=await caches.keys();
