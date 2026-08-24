@@ -1,0 +1,17 @@
+/* Abysss visual layer: keep the familiar timer UI, refine spacing and depth. */
+:root{
+  --abysss-glow:rgba(156,134,255,.14);
+  --abysss-line:#273149;
+}
+body{background:radial-gradient(circle at 50% -10%,#10182a 0,#05070d 32%,#000 70%)}
+.wrap{position:relative}
+.bar{background:linear-gradient(180deg,rgba(13,18,30,.96),rgba(4,6,11,.96));border-color:var(--abysss-line);box-shadow:0 5px 22px var(--abysss-glow)}
+#grid .card{background:linear-gradient(180deg,#0b111d,#070b12);box-shadow:0 2px 10px rgba(0,0,0,.22)}
+#grid .card.open{box-shadow:0 0 0 1px rgba(156,134,255,.32),0 8px 24px rgba(0,0,0,.42)}
+.name-input,.rank-input,.tsub-cur-input{background:rgba(17,17,25,.92)!important;border-radius:4px!important}
+.name-input.editing,.rank-input.editing{padding-left:3px;padding-right:3px}
+.edit-panel{background:linear-gradient(180deg,#080b13,#020306);box-shadow:0 12px 28px rgba(0,0,0,.5)}
+@media (max-width:560px){
+  body{padding-left:8px;padding-right:8px}
+  #grid{column-gap:3px;row-gap:5px}
+}
