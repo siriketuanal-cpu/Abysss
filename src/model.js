@@ -7,5 +7,7 @@ const empty=()=>Array.from({length:6},(_,i)=>makeTimer(i+1));
 const load=()=>{try{const raw=localStorage.getItem(STORAGE);const m=raw?JSON.parse(raw):null;return m&&Array.isArray(m.timers)?m:{timers:empty()}}catch{return {timers:empty()}}};
 const save=m=>{try{localStorage.setItem(STORAGE,JSON.stringify(m));return true}catch{return false}};
 const recover=t=>{if(!t.running||t.start===null)return t;const elapsed=Math.max(0,Date.now()-t.start),steps=Math.floor(elapsed/STEP),current=clamp(t.current+steps,0,t.max);if(current>=t.max)return {...t,current,start:null,running:false};return {...t,current,start:t.start+steps*STEP}};
-window.AbysssModel={STORAGE,STEP,MAX,makeTimer,empty,load,save,recover};
+const phase=t=>{if(!t.running||t.start===null)return null;const elapsed=Math.max(0,Date.now()-t.start);return elapsed%STEP};
+const consume40KeepingPhase=t=>{const before=recover(t),amount=Math.floor(before.current/40)*40,current=Math.max(0,before.current-amount);if(current===0)return {...before,current:0,start:null,running:false,consumed:amount};if(before.start===null)return {...before,current,consumed:amount};return {...before,current,running:true,consumed:amount};};
+window.AbysssModel={STORAGE,STEP,MAX,makeTimer,empty,load,save,recover,phase,consume40KeepingPhase};
 })();
