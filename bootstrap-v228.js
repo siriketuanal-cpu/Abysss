@@ -8,20 +8,20 @@ scheduleStartupStabilization();
 const startupGraceUntil = Date.now() + 3000;
 
 // ---- 画面復帰時のタイマー同期処理 ----
-// 軽量優先版ではvisibilitychangeだけを復帰入口にし、復帰イベントの多重保険は持たない。
+// 復帰時は下段ロードを絶対に走らせず、タイマー再接続と最小限の再描画だけにする。
 let resumeRenderTimer = null;
 
 function resumeTicking(){
   if (document.hidden) return;
-  // 復帰直後は予約だけを再接続し、全体描画はブラウザの復帰処理から切り離す。
-  scheduleSecondaryGamesBuild();
+  // 復帰時は下段の遅延ロードを一切しない（ネットワーク発生を防ぐ）
+  // scheduleSecondaryGamesBuild();  ← 削除
   startTicking(true);
   if (resumeRenderTimer) clearTimeout(resumeRenderTimer);
   resumeRenderTimer = setTimeout(() => {
     resumeRenderTimer = null;
     if (document.hidden) return;
     render();
-  }, 150);
+  }, 120); // 150→120に少し短縮
 }
 
 function scheduleResetCheck(){
@@ -68,14 +68,19 @@ function scheduleServiceWorkerRegistration(){
   const register = async () => {
     try {
       const existing = await navigator.serviceWorker.getRegistration('./');
-      // 未登録時だけ登録する。登録済みなら、アプリ側から更新確認を促さない。
+      // 未登録時だけ登録する。登録済みなら、アプリ側から更新確認を一切促さない。
+      // registration.update() は絶対に呼ばない。
       if (!existing) {
         await navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' });
       }
+      // 登録済みの場合は何もしない（ブラウザ標準の更新判定に完全に任せる）
     } catch (_) {}
   };
 
-  // 初回登録だけを初期描画後に行い、登録済みPWAの更新確認はブラウザ標準判定へ任せる。
-  if ('requestIdleCallback' in window) requestIdleCallback(register, { timeout: 8000 });
-  else setTimeout(register, 2500);
+  // 初回登録だけを、さらに後ろにずらして初期描画とネットワーク競合を避ける
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(register, { timeout: 12000 }); // 8秒→12秒に延長
+  } else {
+    setTimeout(register, 4000); // 2.5秒→4秒に延長
+  }
 }
