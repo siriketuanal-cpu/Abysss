@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>深淵</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/siriketuanal-cpu/Abyss.3/main/styles-primary-v237.min.css?v=17">
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <div class="bar-left"><span class="bar-note">毎朝5:00更新</span></div>
+    <span class="daily-val" id="dailyDateDisplay">—</span>
+    <span class="daily-progress" id="dailyProgress"></span>
+  </div>
+  <div class="grid" id="grid" aria-label="ドットアビス全グループ"></div>
+  <div id="gamesAll" aria-label="Gジェネ・スターリープタイマー" data-secondary-state="idle">
+    <div class="game-tab-panel" id="game-panel-g" aria-label="Gジェネ"><div class="gsection"><div class="gwrap" id="gwrap"></div></div></div>
+    <div class="game-tab-panel" id="game-panel-sl" aria-label="スターリープ"><div class="slsection"><div class="slwrap" id="slwrap"></div></div></div>
+  </div>
+  <div class="backdrop" id="backdrop" onclick="closeAllPanels()"></div>
+</div>
+<footer><span id="saveStamp">読み込み中…</span></footer>
+<script>
+/* Abysss: ultra-thin boot shell. The proven Abyss.3 engine remains the behavior reference. */
+(()=>{
+  const ROOT='https://raw.githubusercontent.com/siriketuanal-cpu/Abyss.3/main/';
+  const nativeAppend=Node.prototype.appendChild;
+  Node.prototype.appendChild=function(node){
+    if(node && node.tagName==='LINK' && node.dataset && node.dataset.deferredAsset){
+      const name=node.dataset.deferredAsset.split('?')[0];
+      node.href=ROOT+name+'?v=17';
+    }else if(node && node.tagName==='SCRIPT' && node.dataset && node.dataset.deferredAsset){
+      const name=node.dataset.deferredAsset.split('?')[0];
+      node.src=ROOT+name+'?v=17';
+    }
+    return nativeAppend.call(this,node);
+  };
+  window.__abysssBoot={started:performance.now()};
+})();
+</script>
+<script defer src="https://raw.githubusercontent.com/siriketuanal-cpu/Abyss.3/main/app-primary-v237.min.js?v=17"></script>
+</body>
+</html>
