@@ -11,6 +11,8 @@ body{background:radial-gradient(circle at 50% -10%,#10182a 0,#05070d 32%,#000 70
 .name-input,.rank-input,.tsub-cur-input{background:rgba(17,17,25,.92)!important;border-radius:4px!important}
 .name-input.editing,.rank-input.editing{padding-left:3px;padding-right:3px}
 .edit-panel{background:linear-gradient(180deg,#080b13,#020306);box-shadow:0 12px 28px rgba(0,0,0,.5)}
+.app-version{display:inline-block;margin-right:6px;font-size:9px;line-height:1;letter-spacing:.2px;opacity:.32;color:#aeb8cf;cursor:pointer;user-select:none;vertical-align:middle}
+.app-version:active{opacity:.65}
 @media (max-width:560px){
   body{padding-left:8px;padding-right:8px}
   #grid{column-gap:3px;row-gap:5px}
