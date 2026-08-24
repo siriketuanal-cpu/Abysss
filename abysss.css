@@ -1,0 +1,11 @@
+/* Abysss visual system: information cards, not conventional timer bars. */
+:root{--aby-bg:#05070c;--aby-panel:#0b0f18;--aby-panel-hi:#101624;--aby-line:#252d3d;--aby-text:#e6eaf2;--aby-dim:#7e8798;--aby-accent:#a998ff;--aby-touch:#171e2c}
+body{background:radial-gradient(circle at 50% -18%,#151d30 0,#070a11 38%,var(--aby-bg) 75%);color:var(--aby-text)}
+#grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px 0}
+.abyss-card{min-width:0;position:relative;border:1px solid var(--aby-line);border-radius:14px;background:linear-gradient(145deg,var(--aby-panel-hi),var(--aby-panel));padding:11px;box-shadow:0 7px 20px rgba(0,0,0,.24);overflow:hidden;transition:transform .12s ease,border-color .12s ease}
+.abyss-card:active{transform:scale(.985);background:var(--aby-touch)}
+.abyss-card-head{display:flex;align-items:center;gap:7px;min-width:0}.abyss-name{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--aby-text);font:600 13px/1.2 system-ui;padding:2px 0}.abyss-name:focus{background:rgba(255,255,255,.04);border-radius:5px;padding:4px 6px}
+.abyss-sync{border:1px solid var(--aby-line);background:transparent;color:var(--aby-dim);border-radius:8px;width:28px;height:28px;font-size:16px}.abyss-sync:active{background:var(--aby-touch);color:var(--aby-text)}
+.abyss-core{padding:16px 2px 12px}.abyss-count{display:flex;align-items:baseline;gap:5px}.abyss-current{font-size:32px;font-weight:700;letter-spacing:-1.2px}.abyss-slash,.abyss-max{color:var(--aby-dim)}.abyss-max{font-size:14px}.abyss-time{margin-top:7px;font-size:11px;color:var(--aby-dim)}
+.abyss-actions{display:flex;gap:5px}.abyss-actions button{flex:1;min-height:34px;border:1px solid var(--aby-line);border-radius:9px;background:rgba(255,255,255,.025);color:var(--aby-text);font-size:11px}.abyss-actions button:active{background:var(--aby-touch)}
+@media(max-width:420px){#grid{gap:6px}.abyss-card{padding:9px}.abyss-current{font-size:28px}.abyss-actions button{font-size:10px}}
