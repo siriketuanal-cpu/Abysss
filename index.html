@@ -8,13 +8,13 @@
 <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#000000">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="styles-primary-v237.min.css?v=18">
-<link rel="stylesheet" href="styles-abysss-v1.css?v=2">
+<link rel="stylesheet" href="styles-primary-v237.min.css?v=19">
+<link rel="stylesheet" href="styles-abysss-v1.css?v=3">
 </head>
 <body>
 <div class="wrap">
   <div class="bar">
-    <div class="bar-left"><span class="app-version" id="appVersion" title="タップで更新確認">v0.2.0</span><span class="bar-note">毎朝5:00更新</span></div>
+    <div class="bar-left"><span class="app-version" id="appVersion" title="タップで更新確認">v0.3.0</span><span class="bar-note">毎朝5:00更新</span></div>
     <span class="daily-val" id="dailyDateDisplay">—</span>
     <span class="daily-progress" id="dailyProgress"></span>
   </div>
@@ -28,7 +28,7 @@
 <footer><span id="saveStamp">読み込み中…</span></footer>
 <script>
 (()=>{
-  const VERSION='0.2.0';
+  const VERSION='0.3.0';
   const el=document.getElementById('appVersion');
   if(!el)return;
   el.addEventListener('click',()=>{
@@ -39,6 +39,6 @@
   window.__abysssVersion=VERSION;
 })();
 </script>
-<script src="app-boot-v1.js?v=2"></script>
+<script src="app-boot-v1.js?v=3"></script>
 </body>
 </html>
