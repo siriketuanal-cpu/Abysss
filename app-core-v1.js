@@ -13,8 +13,9 @@
     'src/daily-weekly-v1.js?v=1',
     'src/games-loader-v1.js?v=1'
   ];
-  Promise.all(modules.map(local))
-    .then(()=>local('app-primary-v237.min.js?v=19'))
+  const core=local('app-primary-v237.min.js?v=19');
+  const extras=Promise.all(modules.map(local));
+  Promise.all([core,extras])
     .then(()=>local('timer-sync-v1.js?v=2'))
     .catch(error=>console.warn('Abysss core load failed',error));
 })();
