@@ -13,7 +13,7 @@
     'src/daily-weekly-v1.js?v=1',
     'src/games-loader-v1.js?v=1'
   ];
-  modules.reduce((p,src)=>p.then(()=>local(src)),Promise.resolve())
+  Promise.all(modules.map(local))
     .then(()=>local('app-primary-v237.min.js?v=19'))
     .then(()=>local('timer-sync-v1.js?v=2'))
     .catch(error=>console.warn('Abysss core load failed',error));
