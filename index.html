@@ -8,7 +8,7 @@
 <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#05070c">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="abysss.css?v=1">
+<link rel="stylesheet" href="abysss.css?v=2">
 </head>
 <body>
 <div class="wrap">
@@ -17,17 +17,20 @@
     <span class="daily-val" id="dailyDateDisplay">—</span>
     <span class="daily-progress" id="dailyProgress"></span>
   </div>
-  <div class="grid" id="grid" aria-label="ドットアビス全グループ"></div>
-  <div id="gamesAll" aria-label="Gジェネ・スターリープタイマー" data-secondary-state="idle">
-    <div class="game-tab-panel" id="game-panel-g" aria-label="Gジェネ"><div class="gsection"><div class="gwrap" id="gwrap"></div></div></div>
-    <div class="game-tab-panel" id="game-panel-sl" aria-label="スターリープ"><div class="slsection"><div class="slwrap" id="slwrap"></div></div></div>
-  </div>
+  <main id="appShell">
+    <section class="shell-status" id="shellStatus" aria-live="polite">Abysss</section>
+    <div class="grid" id="grid" aria-label="ドットアビス全グループ"></div>
+    <div id="gamesAll" aria-label="Gジェネ・スターリープタイマー" data-secondary-state="idle">
+      <div class="game-tab-panel" id="game-panel-g" aria-label="Gジェネ"><div class="gsection"><div class="gwrap" id="gwrap"></div></div></div>
+      <div class="game-tab-panel" id="game-panel-sl" aria-label="スターリープ"><div class="slsection"><div class="slwrap" id="slwrap"></div></div></div>
+    </div>
+  </main>
   <div class="backdrop" id="backdrop" onclick="closeAllPanels()"></div>
 </div>
 <footer><span id="saveStamp">読み込み中…</span></footer>
 <script>
 (()=>{const VERSION='0.4.0',el=document.getElementById('appVersion');if(!el)return;el.addEventListener('click',()=>{const u=new URL(location.href);u.searchParams.set('update',Date.now().toString(36));location.replace(u.toString())},{passive:true});window.__abysssVersion=VERSION})();
 </script>
-<script src="boot.js?v=1"></script>
+<script src="boot.js?v=2"></script>
 </body>
 </html>
