@@ -14,7 +14,7 @@
 <body>
 <div class="wrap">
   <div class="bar">
-    <div class="bar-left"><span class="app-version" id="appVersion" title="タップで更新確認">v0.3.0</span><span class="bar-note">毎朝5:00更新</span></div>
+    <div class="bar-left"><span class="app-version" id="appVersion" title="タップで更新確認">v0.4.0</span><span class="bar-note">毎朝5:00更新</span></div>
     <span class="daily-val" id="dailyDateDisplay">—</span>
     <span class="daily-progress" id="dailyProgress"></span>
   </div>
@@ -27,7 +27,7 @@
 </div>
 <footer><span id="saveStamp">読み込み中…</span></footer>
 <script>
-(()=>{const VERSION='0.3.0',el=document.getElementById('appVersion');if(!el)return;el.addEventListener('click',()=>{const u=new URL(location.href);u.searchParams.set('update',Date.now().toString(36));location.replace(u.toString())},{passive:true});window.__abysssVersion=VERSION})();
+(()=>{const VERSION='0.4.0',el=document.getElementById('appVersion');if(!el)return;el.addEventListener('click',()=>{const u=new URL(location.href);u.searchParams.set('update',Date.now().toString(36));location.replace(u.toString())},{passive:true});window.__abysssVersion=VERSION})();
 </script>
 <script src="boot.js?v=1"></script>
 </body>
