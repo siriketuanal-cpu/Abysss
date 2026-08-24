@@ -1,0 +1,36 @@
+name: Import Abyss.3 runtime
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Abysss
+        uses: actions/checkout@v4
+      - name: Import runtime assets from Abyss.3
+        run: |
+          git clone --depth 1 https://github.com/siriketuanal-cpu/Abyss.3.git /tmp/abyss3
+          cp /tmp/abyss3/app-primary-v237.min.js .
+          cp /tmp/abyss3/games-deferred-v237.min.js .
+          cp /tmp/abyss3/styles-primary-v237.min.css .
+          cp /tmp/abyss3/styles-games-v237.min.css .
+          cp /tmp/abyss3/manifest.json .
+          cp /tmp/abyss3/icon-192.png .
+          cp /tmp/abyss3/icon-512.png .
+          cp /tmp/abyss3/icon-maskable-512.png .
+          cp /tmp/abyss3/update.html .
+      - name: Commit imported assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app-primary-v237.min.js games-deferred-v237.min.js styles-primary-v237.min.css styles-games-v237.min.css manifest.json icon-192.png icon-512.png icon-maskable-512.png update.html
+          if git diff --cached --quiet; then
+            echo 'No runtime changes.'
+            exit 0
+          fi
+          git commit -m 'Import Abyss.3 runtime assets'
+          git push
