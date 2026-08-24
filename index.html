@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#000000">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="styles-primary-v237.min.css?v=19">
-<link rel="stylesheet" href="styles-abysss-v1.css?v=3">
+<link rel="stylesheet" href="app.css?v=1">
 </head>
 <body>
 <div class="wrap">
@@ -27,18 +27,8 @@
 </div>
 <footer><span id="saveStamp">読み込み中…</span></footer>
 <script>
-(()=>{
-  const VERSION='0.3.0';
-  const el=document.getElementById('appVersion');
-  if(!el)return;
-  el.addEventListener('click',()=>{
-    const u=new URL(location.href);
-    u.searchParams.set('update',Date.now().toString(36));
-    location.replace(u.toString());
-  },{passive:true});
-  window.__abysssVersion=VERSION;
-})();
+(()=>{const VERSION='0.3.0',el=document.getElementById('appVersion');if(!el)return;el.addEventListener('click',()=>{const u=new URL(location.href);u.searchParams.set('update',Date.now().toString(36));location.replace(u.toString())},{passive:true});window.__abysssVersion=VERSION})();
 </script>
-<script src="app-boot-v1.js?v=3"></script>
+<script src="boot.js?v=1"></script>
 </body>
 </html>
