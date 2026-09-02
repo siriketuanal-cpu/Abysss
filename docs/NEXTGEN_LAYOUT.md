@@ -3,17 +3,20 @@
 ## Runtime layers
 
 1. `src/chrono-core.js` — pure timer mathematics and state transitions.
-2. `src/timer-engine.js` — compatibility layer retained during migration.
+2. `src/chrono-overrides.js` — legacy-compatible adapters backed by Chrono Core during migration.
 3. `src/core.js` — application state, persistence, rendering, and legacy-compatible orchestration.
 4. `src/dotabyss.js` — Dot Abyss UI and interaction behavior.
 5. `src/g-generation.js` / `src/star-leap.js` — secondary-game logic.
 6. `src/runtime.js` — lightweight scheduling/resume layer.
+7. `src/asset-loader.js` — canonical deferred asset-path bridge.
 
 ## Distribution
 
 - `dist/app.min.js` — primary application bundle.
-- `dist/games.min.js` — secondary-game bundle.
+- `dist/games.min.js` — canonical secondary-game bundle.
 - `dist/app.min.css` — primary styles.
-- `dist/games.min.css` — secondary-game styles.
+- `dist/games.min.css` — canonical secondary-game stylesheet.
 
-Legacy root bundles remain only where the current deferred-loading path still references them. They should be removed after the deferred source references and regenerated distribution are verified together.
+Legacy root-level versioned game assets have been removed from the NextGen branch. Deferred loading is redirected to the canonical `dist` assets without changing the existing game UI contract.
+
+`main` remains untouched while this branch is verified.
