@@ -45,7 +45,7 @@ const gamesCss = [
   '#gamesAll{contain:layout paint style;}',
 ].join('\n');
 
-buildJs('dist/app.min.js', ['src/core.js', 'src/dotabyss.js', 'src/bootstrap.js']);
+buildJs('dist/app.min.js', ['src/timer-engine.js', 'src/core.js', 'src/dotabyss.js', 'src/bootstrap.js']);
 buildJs('dist/games.min.js', ['src/g-generation.js', 'src/star-leap.js']);
 buildCss('dist/app.min.css', primaryCss);
 buildCss('dist/games.min.css', gamesCss);
