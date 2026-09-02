@@ -1,9 +1,25 @@
 /* Abysss NextGen runtime layer v1
  * Keeps the existing UI/interaction code intact.
- * Replaces the old interaction-recovery churn with one quiet minute-boundary scheduler.
+ * Owns lightweight scheduling and runtime asset compatibility.
  */
 (() => {
   if (typeof window === 'undefined') return;
+
+  // Legacy lazy-load call sites still name the old generated assets.
+  // Resolve those names here, at runtime, to the canonical dist bundles.
+  const legacyToDist = Object.freeze({
+    'styles-games-v237.min.css': 'dist/games.min.css',
+    'games-deferred-v237.min.js': 'dist/games.min.js'
+  });
+  const originalLoadDeferredAsset = window.loadDeferredAsset;
+  if (typeof originalLoadDeferredAsset === 'function') {
+    window.loadDeferredAsset = (kind, src) => {
+      const raw = String(src || '');
+      const clean = raw.split('?')[0].replace(/^\.\//, '');
+      const mapped = legacyToDist[clean];
+      return originalLoadDeferredAsset(kind, mapped ? mapped + '?v=1' : src);
+    };
+  }
 
   const originalStopTicking = typeof window.stopTicking === 'function'
     ? window.stopTicking
