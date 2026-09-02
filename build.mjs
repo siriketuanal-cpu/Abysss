@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const root = dirname(fileURLToPath(import.meta.url));
-const esbuild = '/home/ubuntu/abyss-timer-react-vite-migration/node_modules/esbuild/bin/esbuild';
+const esbuild = process.env.ESBUILD_BIN || 'esbuild';
 const read = (name) => readFileSync(join(root, name), 'utf8');
 
 function writeOutput(outputName, content) {
