@@ -7,8 +7,8 @@
 3. `src/core.js` — application state, persistence, rendering, and legacy-compatible orchestration.
 4. `src/dotabyss.js` — Dot Abyss UI and interaction behavior.
 5. `src/g-generation.js` / `src/star-leap.js` — secondary-game logic.
-6. `src/runtime.js` — lightweight scheduling/resume layer.
-7. `src/asset-loader.js` — canonical deferred asset-path bridge.
+6. `src/runtime.js` — lightweight scheduling/resume layer and deferred-asset compatibility.
+7. `src/bootstrap.js` — startup and event wiring only.
 
 ## Distribution
 
@@ -17,6 +17,6 @@
 - `dist/app.min.css` — primary styles.
 - `dist/games.min.css` — canonical secondary-game stylesheet.
 
-Legacy root-level versioned game assets have been removed from the NextGen branch. Deferred loading is redirected to the canonical `dist` assets without changing the existing game UI contract.
+Legacy root-level versioned game assets have been removed from the NextGen branch. `runtime.js` redirects the existing deferred-loader names to the canonical `dist` assets, preserving the current lazy-load contract without retaining duplicate generated files.
 
 `main` remains untouched while this branch is verified.
