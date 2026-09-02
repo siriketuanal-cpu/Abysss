@@ -11,5 +11,5 @@ function css(out, src) { write(out, execFileSync(esbuild,['--minify','--legal-co
 const lines = read('src/styles.css').split('\n');
 css('dist/app.min.css',[...lines.slice(0,471),':root{--timer-pop-system-font:ui-rounded,"Arial Rounded MT Bold","Trebuchet MS",Roboto,system-ui,sans-serif;}','input,textarea{caret-color:transparent!important;}'].join('\n'));
 css('dist/games.min.css',[...lines.slice(471),'#gamesAll{contain:layout paint style;}'].join('\n'));
-js('dist/app.min.js',['src/chrono-core.js','src/core.js','src/chrono-overrides.js','src/dotabyss.js','src/bootstrap.js']);
+js('dist/app.min.js',['src/chrono-core.js','src/core.js','src/chrono-overrides.js','src/asset-loader.js','src/dotabyss.js','src/bootstrap.js']);
 js('dist/games.min.js',['src/g-generation.js','src/star-leap.js']);
