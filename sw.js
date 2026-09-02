@@ -1,9 +1,9 @@
-/* 深淵タイマー Service Worker — 起動性能最適化版 */
+/* 深淵タイマー Service Worker — Abysss v17 */
 /* 公開時にindex.htmlまたは静的ファイルを更新したら CACHE_NAME を上げる。 */
 const CACHE_PREFIX = 'abyss2-game-split-';
-const CACHE_NAME = 'abyss2-game-split-v16-quiet-resume';
+const CACHE_NAME = 'abyss2-game-split-v17-abysss-core';
 
-// 起動に必須の最小アプリシェル。アイコンは公開先に置く前提。
+// 起動に必須の最小アプリシェル。
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -11,6 +11,7 @@ const CORE_ASSETS = [
   './styles-games-v237.min.css?v=16',
   './app-primary-v237.min.js?v=16',
   './games-deferred-v237.min.js?v=16',
+  './abysss-performance-v1.js?v=17',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -21,7 +22,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-      // 失敗した1ファイルでアプリシェル全体の更新を止めない。
       await Promise.all(CORE_ASSETS.map(async (url) => {
         try {
           await cache.add(new Request(url, { cache: 'reload' }));
@@ -53,11 +53,9 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // アプリシェルはキャッシュ優先で返し、オンライン起動時の余計な再取得を避ける。
   event.respondWith(
     caches.match(request).then(async (cached) => {
       if (cached) return cached;
-
       try {
         const response = await fetch(request);
         if (response && response.ok) {
@@ -66,7 +64,6 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       } catch (_) {
-        // ナビゲーション要求だけは、キャッシュ済みのアプリ本体へフォールバックする。
         if (request.mode === 'navigate') {
           return (await caches.match('./index.html')) || Response.error();
         }
