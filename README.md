@@ -4,13 +4,15 @@ Abysss is the lightweight, split-file version of the Dot Abyss timer.
 
 ## NextGen source layout
 
-- `src/timer-engine.js` — shared timer calculations
-- `src/core.js` — state, rendering, and compatibility logic
+- `src/chrono-core.js` — pure shared timer mathematics and state transitions
+- `src/chrono-overrides.js` — temporary legacy-compatible Chrono Core adapters
+- `src/core.js` — state, persistence, rendering, and compatibility logic
 - `src/dotabyss.js` — Dot Abyss-specific UI and interactions
 - `src/g-generation.js` — G-Gen timer
 - `src/star-leap.js` — STAR LEAP timer
-- `src/bootstrap.js` — startup/reset/service-worker wiring
+- `src/bootstrap.js` — startup wiring
 - `src/runtime.js` — lightweight timer scheduling and resume handling
+- `src/asset-loader.js` — temporary legacy asset-name compatibility bridge
 - `src/styles.css` — stylesheet source
 
 ## Build outputs
