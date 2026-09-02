@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 const root = dirname(fileURLToPath(import.meta.url));
-const esbuild = '/home/ubuntu/abyss-timer-react-vite-migration/node_modules/esbuild/bin/esbuild';
+const esbuild = process.env.ESBUILD_BIN || 'esbuild';
 const read = n => readFileSync(join(root, n), 'utf8');
 const write = (n, c) => { const p = join(root, n); mkdirSync(dirname(p), {recursive:true}); writeFileSync(p,c); };
 function js(out, files) { write(out, execFileSync(esbuild,['--minify-syntax','--minify-whitespace','--legal-comments=none','--charset=utf8'],{input:files.map(read).join('\n;\n'),encoding:'utf8'})); }
