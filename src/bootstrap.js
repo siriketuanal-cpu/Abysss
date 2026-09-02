@@ -2,15 +2,8 @@
 loadState();
 setupDelegatedEvents();
 
-// Secondary games remain lazy, but a direct interaction can promote their load.
-const gamesRootForPriorityLoad = document.getElementById('gamesAll');
-if (gamesRootForPriorityLoad) {
-  gamesRootForPriorityLoad.addEventListener(
-    'pointerdown',
-    () => scheduleSecondaryGamesBuild(true),
-    { passive: true }
-  );
-}
+// Secondary games stay lazy; touching their area promotes the canonical bundle load.
+const gamesRoot = document.getElementById('gamesAll');
+if (gamesRoot) gamesRoot.addEventListener('pointerdown', () => scheduleSecondaryGamesBuild(true), { passive: true });
 
-// Service-worker registration is intentionally deferred by the core startup path.
 scheduleStartupStabilization();
