@@ -1,11 +1,17 @@
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const esbuild = '/home/ubuntu/abyss-timer-react-vite-migration/node_modules/esbuild/bin/esbuild';
 const read = (name) => readFileSync(join(root, name), 'utf8');
+
+function writeOutput(outputName, content) {
+  const outputPath = join(root, outputName);
+  mkdirSync(dirname(outputPath), { recursive: true });
+  writeFileSync(outputPath, content);
+}
 
 function buildJs(outputName, sources) {
   const source = sources.map(read).join('\n;\n');
@@ -15,7 +21,7 @@ function buildJs(outputName, sources) {
     '--legal-comments=none',
     '--charset=utf8',
   ], { input: source, encoding: 'utf8', stdio: ['pipe', 'pipe', 'inherit'] });
-  writeFileSync(join(root, outputName), output);
+  writeOutput(outputName, output);
 }
 
 function buildCss(outputName, source) {
@@ -25,7 +31,7 @@ function buildCss(outputName, source) {
     '--charset=utf8',
     '--loader=css',
   ], { input: source, encoding: 'utf8', stdio: ['pipe', 'pipe', 'inherit'] });
-  writeFileSync(join(root, outputName), output);
+  writeOutput(outputName, output);
 }
 
 const cssLines = read('src/styles.css').split('\n');
