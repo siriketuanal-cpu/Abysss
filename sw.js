@@ -1,6 +1,6 @@
 /* Abysss Service Worker */
 const CACHE_PREFIX = 'abysss-';
-const CACHE_NAME = 'abysss-v1';
+const CACHE_NAME = 'abysss-v2';
 
 const CORE_ASSETS = [
   './',
@@ -9,7 +9,9 @@ const CORE_ASSETS = [
   './dist/app.min.js?v=1',
   './dist/games.min.css?v=1',
   './dist/games.min.js?v=1',
+  './src/chrono-core.js?v=1',
   './src/runtime.js?v=1',
+  './src/asset-loader.js?v=1',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
